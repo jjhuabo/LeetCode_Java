@@ -8,12 +8,35 @@ package com.company;
  */
 
 //分析：这个题目也很明显，就是考察基本的数据结构的应用
+//因为nums1 是 nums2的子集，也就是说nums1中的每个元素都会在nums2中出现
+//所以这里可以采取一种策略就是利用队列将nums2中的每个元素排列好。并同时利用map存储好
+//对应的索引，这样在后续查询的时候就是0(1)的复杂度。
+
+import java.util.*;
 
 public class NextGreateElement {
 
-    public int [] nextGreaterElement(int [] nums1,int nums2)
+    public int [] nextGreaterElement(int [] nums1,int[] nums2)
     {
-        int [] ans = new int[4];
-        return ans;
+        Map<Integer,Integer>map = new HashMap<>();
+        int[] result = new int[nums1.length];
+        Deque<Integer>stack = new ArrayDeque<>();
+
+        for (int num2 : nums2)
+        {
+            while (!stack.isEmpty() && stack.peek() < num2)
+            {
+                map.put(stack.removeFirst(),num2);
+            }
+
+            stack.addFirst(num2);
+        }
+
+        for (int i = 0;i < nums1.length;i++)
+        {
+            result[i] = map.getOrDefault(nums1[i],-1);
+        }
+
+        return result;
     }
 }
