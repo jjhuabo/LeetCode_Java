@@ -15,6 +15,7 @@ package com.company;
 //思路：这里的问题就是写出每个节点上的值
 //      然后求解平均值
 //      最后将平均值加入到数组中间
+//看到这个问题应该尝试使用广度搜索
 
 import java.util.ArrayList;
 import java.util.LinkedList;
